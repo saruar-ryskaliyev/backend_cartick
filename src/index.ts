@@ -7,6 +7,7 @@ import globalRouter from './global-router';
 import { logger } from './logger';
 import cors from 'cors';
 import axios from 'axios';
+import { set } from 'mongoose';
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ app.use(logger);
 app.use(express.json());
 
 
-const url = ``; 
+const url = `https://backend-cartick.onrender.com`; 
 const interval = 30000; 
 
 function reloadWebsite() {
@@ -32,6 +33,8 @@ function reloadWebsite() {
       console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
     });
 }
+
+setInterval(reloadWebsite, interval);
 
 
 app.use(cors({
