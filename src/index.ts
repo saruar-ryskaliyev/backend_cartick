@@ -38,7 +38,7 @@ setInterval(reloadWebsite, interval);
 
 
 app.use(cors({
-    origin: ['http://localhost:3000', "https://frontend-cartick.vercel.app/search"],
+    origin: ['http://localhost:3000', "https://frontend-cartick.vercel.app"],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
