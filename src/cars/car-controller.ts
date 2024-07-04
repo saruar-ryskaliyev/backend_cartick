@@ -19,7 +19,6 @@ const getCars = async (req: Request, res: Response): Promise<void> => {
 const getCarsByGemini = async (req: Request, res: Response): Promise<void> => {
     try {
         const { user } = req as any;
-        console.log("User:",user)
 
         const userInput = req.query.q as string;
         const searchParams = await parseUserInputWithGemini(userInput);
@@ -39,6 +38,18 @@ const getCarsByGemini = async (req: Request, res: Response): Promise<void> => {
         res.json(cars);
     } catch (error) {
         res.status(500).json({ error: error });
+    }
+};
+
+const searchAsGuest = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const userInput = req.query.q as string;
+        const searchParams = await parseUserInputWithGemini(userInput);
+        const cars = await searchCars(searchParams);
+
+        res.json(cars);
+    } catch (error) {
+        res.status(500).json({ error: error || error });
     }
 };
 
@@ -99,4 +110,4 @@ const checkNewCars = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-export { getCars, getCarsByGemini, checkNewCars };
+export { getCars, getCarsByGemini, checkNewCars, searchAsGuest };

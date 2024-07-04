@@ -6,6 +6,7 @@ import connectDB from './db';
 import globalRouter from './global-router';
 import { logger } from './logger';
 import cors from 'cors';
+import axios from 'axios';
 
 dotenv.config();
 
@@ -17,6 +18,21 @@ connectDB();
 
 app.use(logger);
 app.use(express.json());
+
+
+const url = ``; 
+const interval = 30000; 
+
+function reloadWebsite() {
+  axios.get(url)
+    .then(response => {
+      console.log(`Reloaded at ${new Date().toISOString()}: Status Code ${response.status}`);
+    })
+    .catch(error => {
+      console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
+    });
+}
+
 
 app.use(cors({
     origin: ['http://localhost:3000', "https://hw-backend-2.vercel.app/"],
